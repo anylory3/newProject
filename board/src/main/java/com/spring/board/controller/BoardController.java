@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.board.dto.BoardDto;
@@ -23,10 +24,10 @@ public class BoardController {
 
 	@RequestMapping(value = "/boardList")
 	public String getBoardList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return "board/boardList";
+		return "boardList";
 	}
 	
-	@RequestMapping(value = "/getBoardList")
+	@RequestMapping(value = "/getBoardList", method = RequestMethod.GET)
 	@ResponseBody
 	public List<BoardDto> getBoardList(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception{
 		
