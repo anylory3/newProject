@@ -20,6 +20,10 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<!-- Css,js 에 대한 리소스 등록 -->
+	<resources location="/css/" mapping="/css/**" />
+	<resources location="/js/" mapping="/js/**" />
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<beans:bean
@@ -28,15 +32,20 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<context:component-scan base-package="com.spring.board" />
+	<context:component-scan base-package="com.spring.board" use-default-filters="false"> 
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" /> 
+    </context:component-scan>
 
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<beans:bean id="loggerInterceptor" class="com.spring.board.common.LoggerInterceptor"></beans:bean>
+			<beans:bean id="loggerInterceptor"
+				class="com.spring.board.common.LoggerInterceptor"></beans:bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
-	
-	 <beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+
+	<beans:bean
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+
 
 </beans:beans>
